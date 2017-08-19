@@ -1,0 +1,7 @@
+# 1. Convert json to haystack2 encoder input format
+jq -r .descriptor tmp.json | xargs -n1 /bin/bash -c 'echo $0|base64 -D|gunzip -d' > tmp.data
+
+# 2. Train haystack2 encoder
+# samps, dims, num buckets, code length
+mkdir output_dir
+train2  tmp.data output_dir 1000 512 512 256
